@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/prodseek-react/static/css/main.0f79c436.css",
+    "main.js": "/prodseek-react/static/js/main.7c218434.js",
+    "static/media/bootstrap-icons.woff?": "/prodseek-react/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/carrots.jpg": "/prodseek-react/static/media/carrots.4728822dacb9bcbc51c8.jpg",
+    "static/media/bootstrap-icons.woff2?": "/prodseek-react/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/grains_cereals.jpg": "/prodseek-react/static/media/grains_cereals.5478f453a7dc9737ede9.jpg",
+    "static/media/dairy_products.jpeg": "/prodseek-react/static/media/dairy_products.e68165ae8c47003221c4.jpeg",
+    "static/media/tomatto.jpeg": "/prodseek-react/static/media/tomatto.1213474e76d5df447bf4.jpeg",
+    "static/media/fruits.jpg": "/prodseek-react/static/media/fruits.f216c135078319ee4070.jpg",
+    "index.html": "/prodseek-react/index.html",
+    "main.0f79c436.css.map": "/prodseek-react/static/css/main.0f79c436.css.map",
+    "main.7c218434.js.map": "/prodseek-react/static/js/main.7c218434.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f79c436.css",
+    "static/js/main.7c218434.js"
+  ]
+}
