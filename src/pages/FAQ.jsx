@@ -1,5 +1,6 @@
 import '../styles/main.scss';
 
+
 const FAQ = () => {
   const faqs = [
     {
