@@ -1,11 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/main.scss';
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Alert,
+  Stack
+} from '@mui/material';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('savedEmail');
+    if (savedEmail) {
+      setEmail(savedEmail);
+    }
+  }, []);
 
   const checkEmail = (e) => {
     e.preventDefault();
@@ -22,44 +38,62 @@ const Login = () => {
     }
 
     setError("");
+    localStorage.setItem('savedEmail', email);
+    localStorage.setItem('isLoggedIn', 'true');
     alert("✅ Login Successful!");
     return true;
   };
 
   return (
-    <div className="content">
-      <section className="container text-center py-5 mt-5">
-        <h2 className="mb-4 teal-text fw-bold">Login</h2>
-        <form className="w-50 mx-auto" onSubmit={checkEmail}>
-          <div className="mb-3">
-            <input 
-              type="email" 
-              className="form-control" 
-              id="emailfield" 
-              placeholder="Email"
+    <Container maxWidth="sm">
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+        textAlign="center"
+      >
+        <Typography variant="h4" color="primary" fontWeight="bold" gutterBottom>
+          Login
+        </Typography>
+
+        <Box component="form" onSubmit={checkEmail} sx={{ width: '100%', mt: 2 }}>
+          <Stack spacing={2}>
+            <TextField
+              label="Email"
+              variant="outlined"
+              fullWidth
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div className="mb-3">
-            <input 
-              type="password" 
-              className="form-control" 
-              id="password" 
-              placeholder="Password"
+            <TextField
+              label="Password"
+              variant="outlined"
+              fullWidth
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <button type="submit" className="btn custom-btn">Login</button><br /><br />
-          <div className="d-flex justify-content-center align-items-center mt-3">
-            <h6 className="mb-0">Don't have an account?</h6>
-            <Link to="/register" className="ms-2 link-secondary text-decoration-none">Register</Link>
-          </div>
-          {error && <div className="text-danger mt-2">{error}</div>}
-        </form>
-      </section>
-    </div>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Login
+            </Button>
+
+            {error && <Alert severity="error">{error}</Alert>}
+
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Typography variant="body2">
+                Don't have an account?
+              </Typography>
+              <Link to="/register" style={{ marginLeft: '8px', textDecoration: 'none', color: '#1976d2' }}>
+                Register
+              </Link>
+            </Box>
+          </Stack>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

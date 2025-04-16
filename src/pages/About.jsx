@@ -1,27 +1,61 @@
-import '../styles/main.scss';
+import { Box, Container, Typography, List, ListItem, ListItemText } from '@mui/material';
 
 const About = () => {
   return (
-    <section className="container text-center py-5 mt-5">
-      <h2 className="mb-4 teal-text fw-bold">About Us</h2>
-      <p className="lead"><strong>Welcome to ProdSeek</strong>, your one-stop destination for fresh and high-quality grocery products!</p>
+    <Container sx={{ py: 5, mt: 5, textAlign: 'center' }}>
+      <Typography variant="h2" sx={{ mb: 4, color: 'teal', fontWeight: 'bold' }}>
+        About Us
+      </Typography>
+      <Typography variant="h5" className="lead">
+        <strong>Welcome to ProdSeek</strong>, your one-stop destination for fresh and high-quality grocery products!
+      </Typography>
 
-      <div className="text-start mx-auto" style={{ maxWidth: '800px' }}>
-        <h3 className="mt-4 teal-text">Who We Are</h3>
-        <p>At <strong>ProdSeek</strong>, we believe that quality food leads to a quality life. Our mission is to provide fresh, organic, and locally sourced groceries at affordable prices.</p>
+      <Box sx={{ maxWidth: 800, textAlign: 'left', mx: 'auto' }}>
+        <Typography variant="h4" sx={{ mt: 4, color: 'teal' }}>
+          Who We Are
+        </Typography>
+        <Typography variant="body1">
+          At <strong>ProdSeek</strong>, we believe that quality food leads to a quality life. Our mission is to provide fresh, organic, and locally sourced groceries at affordable prices.
+        </Typography>
 
-        <h3 className="mt-4 teal-text">Why Choose Us?</h3>
-        <ul className="list-unstyled">
-          <li>✔ <strong>Fresh & Organic</strong> – We source directly from trusted farms and suppliers.</li>
-          <li>✔ <strong>Affordable Prices</strong> – Get top-quality groceries without breaking the bank.</li>
-          <li>✔ <strong>Convenience</strong> – Order online and enjoy doorstep delivery.</li>
-          <li>✔ <strong>Customer Satisfaction</strong> – We prioritize quality and service.</li>
-        </ul>
+        <Typography variant="h4" sx={{ mt: 4, color: 'teal' }}>
+          Why Choose Us?
+        </Typography>
+        <List>
+          <ListItem>
+            <ListItemText
+              primary="✔ Fresh & Organic"
+              secondary="We source directly from trusted farms and suppliers."
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="✔ Affordable Prices"
+              secondary="Get top-quality groceries without breaking the bank."
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="✔ Convenience"
+              secondary="Order online and enjoy doorstep delivery."
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="✔ Customer Satisfaction"
+              secondary="We prioritize quality and service."
+            />
+          </ListItem>
+        </List>
 
-        <h3 className="mt-4 teal-text">Our Vision</h3>
-        <p>To revolutionize the grocery shopping experience by making fresh, healthy, and affordable products accessible to every household.</p>
-      </div>
-    </section>
+        <Typography variant="h4" sx={{ mt: 4, color: 'teal' }}>
+          Our Vision
+        </Typography>
+        <Typography variant="body1">
+          To revolutionize the grocery shopping experience by making fresh, healthy, and affordable products accessible to every household.
+        </Typography>
+      </Box>
+    </Container>
   );
 };
 

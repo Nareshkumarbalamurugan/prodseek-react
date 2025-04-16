@@ -1,6 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/main.scss';
+import {
+  Container,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Button,
+  Typography,
+  Alert,
+  Stack,
+  Box
+} from '@mui/material';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -56,112 +68,138 @@ const Register = () => {
       return;
     }
 
-    // If everything is fine
     setError("");
+
+    // ✅ Save to localStorage
+    localStorage.setItem('registeredUser', JSON.stringify(formData));
+
     alert("✅ Registration Successful!");
     return true;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
+  const handleReset = () => {
+    setFormData({
+      username: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirm: '',
+      ageval: '',
+      district: 'Select District'
+    });
+    setError('');
+  };
+
   return (
-    <div className="content">
-      <section className="container text-center py-5 mt-5">
-        <h2 className="mb-4 teal-text fw-bold">Register</h2>
-        <form className="w-50 mx-auto" id="registrationForm" onSubmit={validateForm}>
-          <div className="mb-3">
-            <input 
-              type="text" 
-              className="form-control" 
-              id="username" 
+    <Container maxWidth="sm">
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+        textAlign="center"
+      >
+        <Typography variant="h4" color="primary" fontWeight="bold" gutterBottom>
+          Register
+        </Typography>
+
+        <Box component="form" onSubmit={validateForm} sx={{ width: '100%', mt: 2 }}>
+          <Stack spacing={2}>
+            <TextField
+              label="Username (8-32 chars)"
               name="username"
-              placeholder="Username (8-32 chars)"
               value={formData.username}
               onChange={handleChange}
+              fullWidth
             />
-          </div>
-          <div className="mb-3">
-            <input 
-              type="email" 
-              className="form-control" 
-              id="email" 
+            <TextField
+              label="Email"
               name="email"
-              placeholder="Email"
+              type="email"
               value={formData.email}
               onChange={handleChange}
+              fullWidth
             />
-          </div>
-          <div className="mb-3">
-            <input 
-              type="tel" 
-              className="form-control" 
-              id="phone" 
+            <TextField
+              label="Phone Number"
               name="phone"
-              placeholder="Phone Number (10 digits)" 
-              maxLength="10"
+              type="tel"
+              inputProps={{ maxLength: 10 }}
               value={formData.phone}
               onChange={handleChange}
+              fullWidth
             />
-          </div>
-          <div className="mb-3">
-            <input 
-              type="password" 
-              className="form-control" 
-              id="password" 
+            <TextField
+              label="Password (with special char)"
               name="password"
-              placeholder="Password (with special char)"
+              type="password"
               value={formData.password}
               onChange={handleChange}
+              fullWidth
             />
-          </div>
-          <div className="mb-3">
-            <input 
-              type="password" 
-              className="form-control" 
-              id="confirm" 
+            <TextField
+              label="Confirm Password"
               name="confirm"
-              placeholder="Confirm Password"
+              type="password"
               value={formData.confirm}
               onChange={handleChange}
+              fullWidth
             />
-          </div>
-          <div className="mb-3">
-            <input 
-              type="number" 
-              className="form-control" 
-              id="ageval" 
+            <TextField
+              label="Age"
               name="ageval"
-              placeholder="Age"
+              type="number"
               value={formData.ageval}
               onChange={handleChange}
+              fullWidth
             />
-          </div>
-          <div className="mb-3">
-            <select className="form-select" name="district" value={formData.district} onChange={handleChange}>
-              <option value="Select District">Select District</option>
-              <option value="CHENNAI">CHENNAI</option>
-              <option value="CHENGALPET">CHENGALPET</option>
-              <option value="TIRUVANNAMALAI">TIRUVANNAMALAI</option>
-            </select>
-          </div>
-          <div className="d-flex justify-content-center gap-3">
-            <button type="submit" className="btn btn-teal w-50">Register</button>
-            <button type="reset" className="btn btn-secondary w-50">Reset</button>
-          </div>
-          <div className="d-flex justify-content-center align-items-center mt-3">
-            <h6 className="mb-0">Already have an account?</h6>
-            <Link to="/login" className="ms-2 link-secondary text-decoration-none">Login</Link>
-          </div>
-          {error && <div id="errormess" className="text-danger mt-2">{error}</div>}
-        </form>
-      </section>
-    </div>
+            <FormControl fullWidth>
+              <InputLabel>District</InputLabel>
+              <Select
+                name="district"
+                value={formData.district}
+                onChange={handleChange}
+                label="District"
+              >
+                <MenuItem value="Select District">Select District</MenuItem>
+                <MenuItem value="CHENNAI">CHENNAI</MenuItem>
+                <MenuItem value="CHENGALPET">CHENGALPET</MenuItem>
+                <MenuItem value="TIRUVANNAMALAI">TIRUVANNAMALAI</MenuItem>
+              </Select>
+            </FormControl>
+
+            <Stack direction="row" spacing={2}>
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Register
+              </Button>
+              <Button type="button" variant="outlined" color="secondary" fullWidth onClick={handleReset}>
+                Reset
+              </Button>
+            </Stack>
+
+            {error && <Alert severity="error">{error}</Alert>}
+
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Typography variant="body2">
+                Already have an account?
+              </Typography>
+              <Link to="/login" style={{ marginLeft: '8px', textDecoration: 'none', color: '#1976d2' }}>
+                Login
+              </Link>
+            </Box>
+          </Stack>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

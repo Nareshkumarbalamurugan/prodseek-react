@@ -1,29 +1,65 @@
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+  Link,
+} from '@mui/material';
 
 const ProductCard = ({ title, image, link, price, description }) => {
+  const CardContentLayout = (
+    <>
+      <CardMedia
+        component="img"
+        height="180"
+        image={image}
+        alt={title}
+      />
+      <CardContent sx={{ textAlign: 'center' }}>
+        <Typography variant="h6" color="primary" fontWeight="bold">
+          {title}
+        </Typography>
+        {price && (
+          <Typography variant="body1" fontWeight="bold">
+            {price}
+          </Typography>
+        )}
+        {description && (
+          <Typography variant="body2" color="text.secondary">
+            {description}
+          </Typography>
+        )}
+        {!link && (
+          <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+            Add to Cart
+          </Button>
+        )}
+      </CardContent>
+    </>
+  );
+
   return (
-    <div className="col">
+    <Box sx={{ width: '100%', maxWidth: 300, mx: 'auto' }}>
       {link ? (
-        <Link to={link} className="card text-decoration-none shadow-lg border-0 product-card">
-          <img src={image} className="card-img-top" alt={title} />
-          <div className="card-body text-center">
-            <h5 className="fw-bold teal-text">{title}</h5>
-            {price && <p className="fw-bold">{price}</p>}
-            {description && <p className="card-text">{description}</p>}
-          </div>
+        <Link
+          component={RouterLink}
+          to={link}
+          underline="none"
+          sx={{ textDecoration: 'none' }}
+        >
+          <Card elevation={6} sx={{ borderRadius: 3 }}>
+            {CardContentLayout}
+          </Card>
         </Link>
       ) : (
-        <div className="card text-decoration-none shadow-lg border-0 product-card">
-          <img src={image} className="card-img-top" alt={title} />
-          <div className="card-body text-center">
-            <h5 className="fw-bold teal-text">{title}</h5>
-            {price && <p className="fw-bold">{price}</p>}
-            {description && <p className="card-text">{description}</p>}
-            <a href="#" className="btn teal-btn">Add to Cart</a>
-          </div>
-        </div>
+        <Card elevation={6} sx={{ borderRadius: 3 }}>
+          {CardContentLayout}
+        </Card>
       )}
-    </div>
+    </Box>
   );
 };
 

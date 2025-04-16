@@ -1,5 +1,5 @@
+import { Box, Container, Grid, Typography } from '@mui/material';
 import ProductCard from '../components/ProductCard';
-import '../styles/main.scss';
 
 // Import images directly
 import fruitsImg from '../assets/images/home_images/fruits.jpg';
@@ -32,16 +32,20 @@ const Products = () => {
   ];
 
   return (
-    <div className="content">
-      <section className="container text-center py-5 mt-5">
-        <h2 className="mb-4 teal-text fw-bold">Our Products</h2>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    <Box sx={{ py: 5, mt: 5 }}>
+      <Container>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: 'teal', fontWeight: 'bold', mb: 4 }}>
+          Our Products
+        </Typography>
+        <Grid container spacing={4}>
           {products.map((product, index) => (
-            <ProductCard key={index} {...product} />
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <ProductCard {...product} />
+            </Grid>
           ))}
-        </div>
-      </section>
-    </div>
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 

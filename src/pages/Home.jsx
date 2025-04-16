@@ -1,7 +1,8 @@
+import React from 'react';
+import { Box, Typography, Container, Grid, TextField, Button } from '@mui/material';
 import ProductCard from '../components/ProductCard';
-import '../styles/main.scss';
 
-// Import images directly
+// Import images
 import fruitsImg from '../assets/images/home_images/fruits.jpg';
 import dairyImg from '../assets/images/home_images/dairy_products.jpeg';
 import grainsImg from '../assets/images/home_images/grains_cereals.jpg';
@@ -33,23 +34,67 @@ const Home = () => {
 
   return (
     <>
-      <section className="text-center p-5 teal-bg text-white">
-        <h1 className="fw-bold">Welcome to ProdSeek</h1>
-        <p className="lead">Find the best products easily and quickly.</p>
-        <div className="input-group w-50 mx-auto">
-          <input type="text" className="form-control" placeholder="Search for products..." />
-          <button className="btn btn-light teal-text">Search</button>
-        </div>
-      </section>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          backgroundColor: '#008080',
+          color: 'white',
+          py: 6,
+          textAlign: 'center'
+        }}
+      >
+        <Typography variant="h3" fontWeight="bold" gutterBottom>
+          Welcome to ProdSeek
+        </Typography>
+        <Typography variant="h6" mb={4}>
+          Find the best products easily and quickly.
+        </Typography>
+        <Box
+          display="flex"
+          justifyContent="center"
+          gap={2}
+          maxWidth={500}
+          mx="auto"
+        >
+          <TextField
+            variant="outlined"
+            placeholder="Search for products..."
+            fullWidth
+            sx={{ backgroundColor: 'white', borderRadius: 1 }}
+          />
+          <Button variant="contained" sx={{ bgcolor: 'white', color: '#008080', '&:hover': { bgcolor: '#f0f0f0' } }}>
+            Search
+          </Button>
+        </Box>
+      </Box>
 
-      <section className="container text-center py-5">
-        <h2 className="mb-4 teal-text fw-bold">Our Products</h2>
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      {/* Product Section */}
+      <Container sx={{ py: 6 }}>
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          color="primary"
+          align="center"
+          gutterBottom
+        >
+          Our Products
+        </Typography>
+
+        <Grid
+          container
+          spacing={4}
+          justifyContent="center"
+          alignItems="stretch"
+        >
           {products.map((product, index) => (
-            <ProductCard key={index} {...product} />
+            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+              <Box display="flex" justifyContent="center" height="100%">
+                <ProductCard {...product} />
+              </Box>
+            </Grid>
           ))}
-        </div>
-      </section>
+        </Grid>
+      </Container>
     </>
   );
 };

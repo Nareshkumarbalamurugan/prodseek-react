@@ -1,5 +1,5 @@
-import '../styles/main.scss';
-
+import { Box, Container, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const FAQ = () => {
   const faqs = [
@@ -26,25 +26,32 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="container py-5 mt-5">
-      <h2 className="text-center teal-text fw-bold mb-5">Frequently Asked Questions</h2>
-      <div className="accordion" id="faqAccordion">
+    <Container sx={{ py: 5, mt: 5 }}>
+      <Typography variant="h4" sx={{ textAlign: 'center', color: 'teal', fontWeight: 'bold', mb: 5 }}>
+        Frequently Asked Questions
+      </Typography>
+      
+      <Box>
         {faqs.map((faq, index) => (
-          <div className="accordion-item" key={index}>
-            <h3 className="accordion-header" id={`heading${index}`}>
-              <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${index}`}>
+          <Accordion key={index} sx={{ mb: 2 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls={`panel${index}a-content`}
+              id={`panel${index}a-header`}
+            >
+              <Typography variant="h6" sx={{ color: 'teal', fontWeight: 'bold' }}>
                 {faq.question}
-              </button>
-            </h3>
-            <div id={`collapse${index}`} className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div className="accordion-body">
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
                 {faq.answer}
-              </div>
-            </div>
-          </div>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
         ))}
-      </div>
-    </section>
+      </Box>
+    </Container>
   );
 };
 
